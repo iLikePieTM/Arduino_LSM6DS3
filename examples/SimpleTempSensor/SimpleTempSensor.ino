@@ -1,5 +1,5 @@
 /*
-  Arduino LSM6DS3 - Simple Gyroscope
+  Arduino LSM6DS3 - Simple Temperature Sensor
 
   This example reads the temperature values from the LSM6DS3
   sensor and continuously prints them to the Serial Monitor
