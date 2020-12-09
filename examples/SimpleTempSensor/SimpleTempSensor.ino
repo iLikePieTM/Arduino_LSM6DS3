@@ -30,8 +30,8 @@ void setup() {
   Serial.print(IMU.temperatureSampleRate());
   Serial.println(" Hz");
   Serial.println();
-  Serial.println("Temperature reading in degrees C");
-  Serial.println("T");
+  Serial.println("Temperature readings in degrees C");
+  Serial.println();
 }
 
 void loop() {
@@ -49,5 +49,7 @@ void loop() {
     }
   }
   // Print the averaged value (for smoothing)
-  Serial.println(t_sum/i);
+  Serial.print("T = ");
+  Serial.print(t_sum/i);
+  Serial.println(" °C");
 }
