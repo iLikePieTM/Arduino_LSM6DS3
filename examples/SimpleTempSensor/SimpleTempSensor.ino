@@ -1,5 +1,5 @@
 /*
-  Arduino LSM6DS3 - Simple Gyroscope
+  Arduino LSM6DS3 - Simple Temperature Sensor
 
   This example reads the temperature values from the LSM6DS3
   sensor and continuously prints them to the Serial Monitor
@@ -30,17 +30,26 @@ void setup() {
   Serial.print(IMU.temperatureSampleRate());
   Serial.println(" Hz");
   Serial.println();
-  Serial.println("Temperature reading in degrees C");
-  Serial.println("T");
+  Serial.println("Temperature readings in degrees C");
+  Serial.println();
 }
 
 void loop() {
-  float t;
+  float t;          // To store temperature readings
+  float t_sum = 0;  // To store the readings sum
+  int i = 0;        // To count the readings
 
-  if (IMU.temperatureAvailable()) {
-    // after IMU.readTemperature() returns, t will contain the temperature reading
-    IMU.readTemperature(t);
-
-    Serial.println(t);
+  while (i < 100) {
+    if (IMU.temperatureAvailable()) {
+      // After IMU.readTemperature() returns, t will contain the temperature reading
+      IMU.readTemperature(t);
+      // Add the reading to the sum and increase the counter
+      t_sum += t;
+      i++;
+    }
   }
+  // Print the averaged value (for smoothing)
+  Serial.print("T = ");
+  Serial.print(t_sum/i);
+  Serial.println(" °C");
 }
