@@ -35,12 +35,19 @@ void setup() {
 }
 
 void loop() {
-  float t;
+  float t;          // To store temperature readings
+  float t_sum = 0;  // To store the readings sum
+  int i = 0;        // To count the readings
 
-  if (IMU.temperatureAvailable()) {
-    // after IMU.readTemperature() returns, t will contain the temperature reading
-    IMU.readTemperature(t);
-
-    Serial.println(t);
+  while (i < 100) {
+    if (IMU.temperatureAvailable()) {
+      // After IMU.readTemperature() returns, t will contain the temperature reading
+      IMU.readTemperature(t);
+      // Add the reading to the sum and increase the counter
+      t_sum += t;
+      i++;
+    }
   }
+  // Print the averaged value (for smoothing)
+  Serial.println(t_sum/i);
 }
